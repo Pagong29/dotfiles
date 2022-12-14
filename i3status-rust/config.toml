@@ -10,17 +10,35 @@ warning_bg = "#283A36"
 warning_fg = "#FF5555"
 
 [icons]
-name = "awesome6"
+name = "material-nf"
 [icons.overrides]
+cpu = "﵅"
+
 
 [[block]]
 block = "focused_window"
-max_width = 50 
-show_marks = "all"
+max_width = 30 
 format = "{combo}"
 [block.theme_overrides]
 idle_bg = "#282A36"
 idle_fg = "#50FA7B"
+
+#[[block]]
+#block = "custom"
+#command = "xrandr --listmonitors | tail -n+2 | tr '+' ' ' | cut -d' ' -f 4 | tr '\n' ' '"
+#interval = "once"
+#signal = 4
+
+
+[[block]]
+block = "custom"
+#icons = true
+command = "cat ~/.wallpaper/split.txt"
+interval = "once"
+signal = 4
+[block.theme_overrides]
+idle_bg = "#282A36"
+idle_fg = "#8BE9FD"
 
 [[block]]
 block = "disk_space"
@@ -30,7 +48,8 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
-format = "{icon} {used}/{total}"
+#format = "{icon} {used}/{total}"
+format = "{icon} {available}"
 [block.theme_overrides]
 idle_bg = "#282A36"
 idle_fg = "#BD93F9"
@@ -59,7 +78,8 @@ idle_fg = "#F1FA8C"
 [[block]]
 block = "cpu"
 interval = 1
-format = "{barchart} {utilization} {frequency}"
+#format = "{barchart} {utilization} {frequency}"
+format = "{utilization} {frequency}"
 [block.theme_overrides]
 idle_bg = "#282A36"
 idle_fg = "#FF79C6"
@@ -74,25 +94,30 @@ info_fg = "#FF79C6"
 warning_bg = "#282A36"
 warning_fb = "#FF5555"
 
-
+#[[block]]
+#block = "load"
+#interval = 1
+#format = "{1m} AVG"
+#[block.theme_overrides]
+#idle_bg = "#282A36"
+#idle_fg = "#FFB86C"
+#alternating_tint_bg = "#282A36"
+#alternating_tint_fg = "#FFB86C"
+#critical_bg = "#282A36"
+#critical_fg = "#FF5555"
+#good_bg = "#282A36"
+#good_fg = "#FFB86C"
+#info_bg = "#282A36"
+#info_fg = "#FFB86C"
+#warning_bg = "#282A36"
+#warning_fb = "#FF5555"
 
 [[block]]
-block = "load"
-interval = 1
-format = "{1m} AVG"
+block="backlight"
+device="intel_backlight"
 [block.theme_overrides]
 idle_bg = "#282A36"
-idle_fg = "#FFB86C"
-alternating_tint_bg = "#282A36"
-alternating_tint_fg = "#FFB86C"
-critical_bg = "#282A36"
-critical_fg = "#FF5555"
-good_bg = "#282A36"
-good_fg = "#FFB86C"
-info_bg = "#282A36"
-info_fg = "#FFB86C"
-warning_bg = "#282A36"
-warning_fb = "#FF5555"
+idle_fg = "#BD93F9"
 
 
 [[block]]
@@ -106,9 +131,52 @@ idle_bg = "#282A36"
 idle_fg = "#50FA7B"
 
 [[block]]
-block = "time"
-interval = 1
-format = "%R %a %d %B %Y"
+block = "net"
+device = "wlan0"
+#format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {graph_down:8;M*_b#50}"
+format = "{ssid} {signal_strength}"
+interval = 5
+hide_inactive=true
+[block.theme_overrides]
+idle_bg = "#282A36"
+idle_fg = "#FFB86C"
+
+
+[[block]]
+block = "net"
+device = "eth0"
+#format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {graph_down:8;M*_b#50}"
+format = "{ssid} {signal_strength}"
+interval = 5
+hide_inactive=true
+[block.theme_overrides]
+idle_bg = "#282A36"
+idle_fg = "#FFB86C"
+
+[[block]]
+block = "battery"
+driver="upower"
+format = "{percentage}"
+#full_format = ""
+#missing_format = "{percentage}"
+hide_missing = true
 [block.theme_overrides]
 idle_bg = "#282A36"
 idle_fg = "#8BE9FD"
+good_bg = "#282A36"
+good_fg = "#8BE9FD"
+info_bg = "#282A36"
+info_fg = "#8BE9FD"
+warning_bg = "#282A36"
+warning_fg = "#8BE9FD"
+critical_bg = "#282A36"
+critical_fg= "#8BE9FD"
+
+[[block]]
+block = "time"
+interval = 1
+#format = "%R %a %d %b %Y"
+format = "%R %a %v"
+[block.theme_overrides]
+idle_bg = "#282A36"
+idle_fg = "#50FA7B"
