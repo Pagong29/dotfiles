@@ -1,0 +1,99 @@
+* {
+    background-color:            #282A36;
+    border-color:                #6272A4;
+    text-color:                  #F8F8F2;
+    // font:                        "JetBrainsMonoNL Nerd Font 14";
+    // prompt-font:                 "JetBrainsMonoNL Nerd Font Bold 14";
+    font: "Arimo 15";
+    prompt-font: "Arimo Bold 15";
+    prompt-background:           #BD93F9;
+    prompt-foreground:           #282A36;
+    prompt-padding:              5px;
+    alternate-normal-background: #44475A;
+    alternate-normal-foreground: @text-color;
+    selected-normal-background:  #6272A4;
+    selected-normal-foreground:  #ffffff;
+    spacing:                     5;
+}
+#window {
+    border:  2;
+    padding: 10;
+    border-radius: 0 20 0 20;
+}
+#mainbox {
+    border:  0;
+    padding: 2;
+}
+#message {
+    border:       1px dash 0px 0px ;
+    padding:      1px ;
+}
+#listview {
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+    spacing:      2px ;
+    scrollbar:    true;
+    padding:      2px 0px 0px ;
+}
+#element {
+    border:  0;
+    padding: 5px ;
+}
+#element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+#element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+#scrollbar {
+    width:        0px ;
+    border:       0;
+    handle-width: 0px ;
+    padding:      0;
+}
+#sidebar {
+    border: 2px dash 0px 0px ;
+}
+#button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+#inputbar {
+    spacing:    0;
+    padding:    1px ;
+}
+#case-indicator {
+    spacing:    0;
+}
+#entry {
+    padding: 4px 4px;
+    expand: false;
+    width: 10em;
+}
+#prompt {
+    padding:          @prompt-padding;
+    background-color: @prompt-background;
+    text-color:       @prompt-foreground;
+    font:             @prompt-font;
+    border-radius:    2px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-icon {
+    background-color: inherit;
+    padding: 5px;
+}
+/* Not actually relevant for this configuration, but it might
+be useful to someone having issues with their icons' background color
+
+element-icon {
+    background-color: inherit;
+
+}
+*/

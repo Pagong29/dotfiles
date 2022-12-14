@@ -1,0 +1,11 @@
+configuration {
+ modi: "drun,window,calc:qalc,ssh,combi";
+ font: "JetBrainsMonoNL Nerd Font 14";
+ combi-modi: "window,drun,ssh";
+ show-icons: true;
+ icon-theme: "Parpirus-Dark";
+ sidebar-mode: true;
+ lines: 15;
+ width: 10;
+ }
+@theme "~/.config/rofi/themes/mytry1.rasi"
