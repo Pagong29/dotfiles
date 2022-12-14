@@ -1,12 +1,26 @@
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 # Variables
 set $mod Mod4
 set $terminal "alacritty"
 
+exec_always --no-startup-id "dbus-update-activation-environment --all"
+
+# picom
+exec_always --no-startup-id "killall -qw picom; picom -b"
+#exec_always --no-startup-id "picom -b"
+
+# power manager
+#exec_always --no-startup-id "lxqt-powermanagement &"
+exec_always --no-startup-id "xfce4-power-manager --daemon"
+# toggle presentation mode
+#xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T
+bindsym $mod+ctrl+p exec --no-startup-id "xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T"
+# xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -v -- to check the status
+# notify-send "Presentation Mode" `xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -v`
+#bindsym $mod+ctrl+p exec --no-startup-id "xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T && notify-send 'Presentation Mode' `xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -v`"
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:JetBrainsMonoNL Nerd Font 1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -26,14 +40,28 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen --lock
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec_always --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# set $refresh_i3status killall -SIGUSR1 i3status-rs
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# brightness
+# bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl s 5%-"
+#bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl s 5%+"
+# bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5%"
+# bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5%"
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 5"
+bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 5"
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -90,11 +118,17 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+v split v
+# bindsym $mod+v exec --no-startup-id "i3-msg 'split v; exec echo '-' > ~/.wallpaper/split.txt'"
+# bindsym $mod+shift+v exec --no-startup-id "i3-msg 'split h; exec '|' > ~/.wallpaper/split.txt'"
 
-# split in vertical orientation
-bindsym $mod+Shift+v split h
+# split in horizontal orientation && pkill -SIGRTMIN+4 i3status-rs"
+bindsym $mod+v split v; exec --no-startup-id "echo 'tlv' > ~/.wallpaper/split.txt && pkill -SIGRTMIN+4 i3status-rs"
+#bindsym $mod+v split v
+
+# split in vertical orientation& & pkill -SIGRTMIN+4 i3status-rs"
+bindsym $mod+Shift+v split h; exec --no-startup-id "echo 'tlh' > ~/.wallpaper/split.txt && pkill -SIGRTMIN+4 i3status-rs"
+#bindsym $mod+Shift+v split h
+
 
 # split in vertical orientation
 # bindsym $mod+v split v
@@ -103,9 +137,9 @@ bindsym $mod+Shift+v split h
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking; exec --no-startup-id "echo 'st' > ~/.wallpaper/split.txt && pkill -SIGRTMIN+4 i3status-rs"
+bindsym $mod+w layout tabbed; exec --no-startup-id "echo 'tb' > ~/.wallpaper/split.txt && pkill -SIGRTMIN+4 i3status-rs"
+bindsym $mod+e layout toggle split; exec --no-startup-id "echo 'tl' > ~/.wallpaper/split.txt && pkill -SIGRTMIN+4 i3status-rs"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -117,7 +151,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -191,21 +225,28 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+r mode "resize"
 
 # altertively
-bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
-bindsym $mod+Shift+u resize grow height 5 px or 5 ppt
-bindsym $mod+Shift+i resize shrink height 5 px or 5 ppt
-bindsym $mod+Shift+o resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+u resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+i resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+o resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+p resize grow width 10 px or 10 ppt
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
 bar {
-        status_command i3status-rs
-	font pango: JetBrains Mono , Font Awesome 6 Free Bold 10 
+  status_command i3status-rs
+	font pango: JetBrainsMonoNL Nerd Font, Font Awesome 6 Free Bold 9 
 	position top
-	tray_output DVI-I-1
+	tray_output eDP-1 
 	separator_symbol "│"
+  bindsym button1 nop
+  bindsym button2 nop
+  bindsym button3 nop
+  bindsym button4 nop
+  bindsym button5 nop
+  bindsym button6 nop
+  bindsym button7 nop
 
 	colors{
 	background #282A36
@@ -224,14 +265,16 @@ bar {
 # polybar 
 # exec_always --no-startup-id "~/.config/polybar/launch.sh &"
 
-# picom
-exec_always --no-startup-id "picom -b --experimental-backends &"
-
 # polkit
-exec_always --no-startup-id "lxsession &"
+# exec_always --no-startup-id "lxsession &"
+exec_always --no-startup-id "xfce4-session &"
+
+
+
 
 # wallpaper
-exec_always --no-startup-id "xwallpaper --output DVI-I-1 --stretch ~/.wallpaper/wallpaper.jpg"
+# exec_always --no-startup-id "xwallpaper --output eDP-1 --stretch ~/.wallpaper/wallpaper.jpg"
+exec_always --no-startup-id "nitrogen --restore"
 
 # unclutter
 exec_always --no-startup-id "unclutter &"
@@ -242,9 +285,11 @@ exec_always --no-startup-id "numlockx &"
 # ibus
 exec_always --no-startup-id "ibus-daemon -drxR"
 
+
 # borders
+bindsym $mod+Ctrl+b border toggle 1
 default_border pixel 2
-default_floating_border pixel 2 
+default_floating_border pixel 2
 
 # disable title bar
 for_window [class="^.*"] border pixel 2
@@ -252,6 +297,56 @@ for_window [class="^.*"] border pixel 2
 # gaps settings
 gaps inner 5 
 gaps outer 5 
+
+bindsym $mod+Ctrl+g gaps outer all toggle 5 
+bindsym $mod+Shift+g gaps inner all toggle 5 
+
+
+# Press $mod+Shift+g to enter the gap mode. 
+# Choose o or i for modifying outer/inner gaps.
+# Press one of + / - (in-/decrement for current workspace) 
+# or 0 (remove gaps for current workspace). If you also press Shift 
+# with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+mod1+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+
+
+
 
 # only enable gaps on a workspaces when there is at least one container
 smart_gaps on
@@ -296,7 +391,7 @@ mode "$mode_system" {
 
 # colors theme
                   #			border  bg	    text	  indi	    child_borer
-client.focused          #6272A4 #6272A4 #F8F8F2 #BD93F9   #6272A4
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #6272A4 #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #6272A4 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #FF5555 #232A36 #F8F8F2 #282A36   #FF5555
@@ -310,39 +405,79 @@ bindsym $mod+minus scratchpad show
 
 
 # Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
+for_window [title="alsamixer"] floating enable border pixel 2
+# for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
+for_window [title="File Transfer*"] floating enable border pixel 2
 for_window [class="fpakman"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Galculator"] floating enable border pixel 2
+for_window [class="GParted"] floating enable border pixel 2 
+for_window [title="i3_help"] floating enable sticky enable border pixel 2
 for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable sticky enable border pixel 2
+for_window [class="lxappearance"] floating enable sticky enable border pixel 2
 for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [class="Manjaro Settings Manager"] floating enable border pixel 2 
 for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border pixel 2
+#for_window [class="Oblogout"] fullscreen enable
+#for_window [class="octopi"] floating enable
+#for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="qt6ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
-for_window [class="Qalcualte-gtk"] floating enable border normal
-for_window [class="qalcualte-gtk"] floating enable border normal
+for_window [class="Pavucontrol"] floating enable border pixel 2
+for_window [class="qt5ct"] floating enable sticky enable border pixel 2 
+for_window [class="qt6ct"] floating enable sticky enable border pixel 2 
+for_window [class="Qtconfig-qt4"] floating enable border border pixel 2 
+for_window [class="Simple-scan"] floating enable border border pixel 2 
+for_window [class="(?i)System-config-printer.py"] floating enable border pixel 2
+for_window [class="Skype"] floating enable border pixel 2 
+for_window [class="Timeset-gui"] floating enable border pixel 2 
+# for_window [class="(?i)virtualbox"] floating enable border normal
+# for_window [class="Xfburn"] floating pixel 2 
+for_window [class="Qalcualte-gtk"] floating enable border pixel 2
+for_window [class="qalcualte-gtk"] floating enable border pixel 2
+for_window [class="qalcualte-qt"] floating enable border  pixel 2
+for_window [class="arandr"] floating enable border pixel 2 
+for_window [class="Arandr"] floating enable border pixel 2 
+for_window [class="kvantummanager"] floating enable border pixel 2
+for_window [class="Kvantum Manager"] floating enable border pixel 2
+for_window [class="vokoscreenNG"] floating enable border pixel 2 
+for_window [class="manjaro-settings-manager"] floating enable border pixel 2 
+for_window [class="Manjaro Settings Manager"] floating enable border pixel 2
+for_window [class="Manjaro Settings Manager"] floating enable border pixel 2
+for_window [title="xterm-codeblocks"] floating enable border pixel 2 
+for_window [class="program-run"] floating enable border pixel 2 
+for_window [class="ksnip"] floating enable border pixel 2 
+
+
 
 # System's Action
 # Mounting and Unmounting Drives
 bindsym $mod+Ctrl+u exec --no-startup-id usbmounter
+
+# moving between monitors
+# Move the current workspace to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+m move workspace to output next
+# Cycle this workspace between outputs VGA1 and LVDS1 but not DVI0
+# bindsym $mod+m move workspace to output eDP-1 HDMI-1 
+# Put this window on the presentation output.
+# bindsym $mod+m move container to output HDMI-1 
+# Put this window on the primary output.
+bindsym $mod+Shift+m move container to output primary
+
+# Print Screen
+bindsym Print exec --no-startup-id "ksnip -m"
+bindsym Shift+Print exec --no-startup-id "ksnip -r"
+bindsym Ctrl+Print exec --no-startup-id "ksnip -a"
+bindsym Ctrl+Shift+Print exec --no-startup-id "ksnip -f"
+
+
+# notification dunst
+# exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec_always --no-startup-id "dunst &"
+bindsym $mod+Ctrl+n exec --no-startup-id "dunstctl set-paused toggle"
+bindsym $mod+n exec --no-startup-id "dunstctl close"
+bindsym $mod+Shift+n exec --no-startup-id "dunstctl close-all"
 
 
