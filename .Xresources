@@ -1,0 +1,287 @@
+! Font options - ~/.fonts.conf seems to override this
+! Resolution for Xft in dots per inch (e.g. 96)
+Xft.dpi:       120
+! Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
+Xft.rgba:      rgba
+
+Xft.antialias: 1
+Xft.hinting:   1
+Xft.autohint:  0
+! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
+Xft.hintstyle: hintsfull
+!Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+rofi*dpi: 120 
+
+!xterm*faceName: Inconsolata-12
+!URxvt*font:     terminus-12
+!URxvt*boldFont: terminus-12
+
+!#define FONTSIZE 16
+!xterm*faceName: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
+!URxvt*font:     xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
+!URxvt*boldFont: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
+
+#define FONTSIZE 14
+xterm*faceName: xft:JetBrainsMonoNL Nerd Font Mono:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=120
+!xterm*faceName: xft:JetBrainsMonoNL Nerd Font Mono:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=120
+URxvt*font:     xft:JetBrainsMonoNL Nerd Font Mono:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=120
+URxvt*boldFont: xft:JetBrainsMonoNL Nerd Font Mono:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=120
+
+! Extra options for xft font spec - ~/.fonts.conf seems to override this
+!:antialias=false:hintstyle=hintfull
+
+#define WINDOWGEOMETRY 90x20
+! xterm
+xterm*dynamiccolors:      true
+xterm*utf8:               2
+xterm*locale: true
+xterm*geometry:           WINDOWGEOMETRY
+xterm*visualBell:         on
+xterm*highlightSelection: true
+!xterm*background:      lightblack
+!xterm*foreground:      lightblue
+xterm*colorMode:       on
+xterm*colorBD:         lightcyan
+xterm*colorBDMode:     on
+!xterm*colorUL:         white
+!xterm*colorULMode:     on
+!xterm*scrollTtyOutput: false
+xterm*scrollKey:       true
+!xterm*scrollBar:       true
+
+! loginshell
+xterm*loginshell: true
+
+! clipboard
+xterm*selectToClipboard: true
+
+! UXTerm
+UXTerm.vt100.translations: #override \n\
+  Ctrl <Key> minus: smaller-vt-font() \n\
+  Ctrl <Key> plus: larger-vt-font()
+
+xterm*vt100.backarrowKey: false
+xterm*ttyModes: erase ^?
+
+
+
+! URxvt
+! URxvt.modifier: mod1
+! URxvt*loginShell: true
+! URxvt.borderless: false
+! URxvt*dynamicColors: on
+! URxvt*letterSpace: -1
+! URxvt.geometry: WINDOWGEOMETRY
+! URxvt.imLocale: en_US.UTF-8
+! URxvt.lineSpace: 0
+! URxvt.loginShell: true
+! URxvt.saveLines: 5000
+! URxvt.scrollBar: false
+! URxvt.scrollstyle: plain
+! URxvt*termName: xterm-256color
+! URxvt.transparent: false
+! URxvt.visualBell: false
+
+! URxvt.urgentOnBell: true
+! URxvt.urlLauncher: chrome
+! URxvt.internalBorder: 3
+! URxvt.depth: 24
+! URxvt.letterSpace: -1
+! URxvt.shading: 100
+
+! URxvt.perl-ext-common:  default,tabbed
+! ,clipboard
+! URxvt.tabbed.tabbar-fg: 4
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg:    9
+! URxvt.tabbed.tab-bg:    0
+! URxvt.keysym.M-c:   perl:clipboard:copy
+! URxvt.keysym.M-v:   perl:clipboard:paste
+
+! Colors
+*.boldMode: true
+*.colorBDMode: false
+!*.colorBD: cyan
+
+!! Dracula
+!!#define fg #F8F8F2
+!!#define bg #282A36
+!!#define base00 #000000
+!!#define base01 #FF5555
+!!#define base02 #50FA7B
+!!#define base03 #F1FA8C
+!!#define base04 #BD93F9
+!!#define base05 #FF79C6
+!!#define base06 #8BE9FD
+!!#define base07 #BFBFBF
+!!#define base08 #4D4D4D
+!!#define base09 #FF6E67
+!!#define base0A #5AF78E
+!!#define base0B #F4F99D
+!!#define base0C #CAA9FA
+!!#define base0D #FF92D0
+!!#define base0E #9AEDFE
+!!#define base0F #E6E6E6
+
+!! Base16 Flat
+!#define base00 #2C3E50
+!#define base01 #34495E
+!#define base02 #7F8C8D
+!#define base03 #95A5A6
+!#define base04 #BDC3C7
+!#define base05 #e0e0e0
+!#define base06 #f5f5f5
+!#define base07 #ECF0F1
+!#define base08 #E74C3C
+!#define base09 #E67E22
+!#define base0A #F1C40F
+!#define base0B #2ECC71
+!#define base0C #1ABC9C
+!#define base0D #3498DB
+!#define base0E #9B59B6
+!#define base0F #be643c
+
+! Base16 Eighties
+!#define base00 #2d2d2d
+!#define base01 #393939
+!#define base02 #515151
+!#define base03 #747369
+!#define base04 #a09f93
+!#define base05 #d3d0c8
+!#define base06 #e8e6df
+!#define base07 #f2f0ec
+!#define base08 #f2777a
+!#define base09 #f99157
+!#define base0A #ffcc66
+!#define base0B #99cc99
+!#define base0C #66cccc
+!#define base0D #6699cc
+!#define base0E #cc99cc
+!#define base0F #d27b53
+
+!! Base16 Atelier Dune
+!#define base00 #20201d
+!#define base01 #292824
+!#define base02 #6e6b5e
+!#define base03 #7d7a68
+!#define base04 #999580
+!#define base05 #a6a28c
+!#define base06 #e8e4cf
+!#define base07 #fefbec
+!#define base08 #d73737
+!#define base09 #b65611
+!#define base0A #cfb017
+!#define base0B #60ac39
+!#define base0C #1fad83
+!#define base0D #6684e1
+!#define base0E #b854d4
+!#define base0F #d43552
+
+! Dark
+!!*.foreground:  fg 
+!!*.background:  bg 
+!!*.cursorColor: fg 
+!!*.cursorColor2:  base0F
+!!*.cursorUnderline: true
+!!*.cursorBlink: true
+
+! Atom Darker
+! #define base00 #1E2127
+! #define base01 #61AFEF
+! #define base02 #98C379
+! #define base03 #56B6C2
+! #define base04 #E06C75
+! #define base05 #C678DD
+! #define base06 #D19A66
+! #define base07 #ABB2BF
+! #define base08 #5C6370
+! #define base09 #61AFEF
+! #define base0A #98C379
+! #define base0B #56B6C2
+! #define base0C #E06C75
+! #define base0D #C678DD
+! #define base0E #D19A66
+! #define base0F #FFFFFF
+
+! Linux Colors
+#define fg #FFFFFF
+#define bg #000000
+#define base00 #000000
+#define base01 #800000
+#define base02 #008000
+#define base03 #808000
+#define base04 #000080
+#define base05 #800080
+#define base06 #008080
+#define base07 #C0C0C0
+#define base08 #808080
+#define base09 #FF0000
+#define base0A #00FF00
+#define base0B #FFFF00
+#define base0C #0000FF
+#define base0D #FF00FF
+#define base0E #00FFFF
+#define base0F #FFFFFF
+
+
+
+!#define fg #979EAB
+!#define bg #181A1F
+!#define base00 #282C34
+!#define base01 #E06C75
+!#define base02 #98C379
+!#define base03 #E5C07B
+!#define base04 #61AFEF
+!#define base05 #BE5046
+!#define base06 #56B6C2
+!#define base07 #979EAB
+!#define base08 #393E48
+!#define base09 #D19A66
+!#define base0A #56B6C2
+!#define base0B #E5C07B
+!#define base0C #61AFEF
+!#define base0D #BE5046
+!#define base0E #56B6C2
+!#define base0F #ABB2BF
+
+*.color0:       base00
+*.color1:       base01
+*.color2:       base02
+*.color3:       base03
+*.color4:       base04
+*.color5:       base05
+*.color6:       base06
+*.color7:       base07
+*.color8:       base08
+*.color9:       base09
+*.color10:      base02
+*.color11:      base0B
+*.color12:      base0C
+*.color13:      base0D
+*.color14:      base0E
+*.color15:      base0F
+*.color16:      base09
+*.color17:      base0F
+*.color18:      base01
+*.color19:      base02
+*.color20:      base04
+*.color21:      base06
+
+! Dark
+*.foreground: base0F
+*.background: bg 
+*.cursorColor: base07
+*.cursorColor2: base07
+*.cursorUnderline: true
+*.cursorBlink: true
+
+! Light
+!*.foreground:   base02
+!*.background:   base07
+!*.cursorColor:  base02
+!*.cursorColor2:  base02
+
+
+!Xcursor.size: 32
